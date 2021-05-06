@@ -87,7 +87,7 @@ while item_name.lower() != "xxx":
     # Currency Formatting (uses currency function)
     add_dollars = ['Price', 'Cost']
     for item in add_dollars:
-        variable_frame[item] = variable_frame[item.apply(currency)]
+        variable_frame[item] = variable_frame[item].apply(currency)
 
     # Printing Area
     print(variable_frame)
