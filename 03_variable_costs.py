@@ -46,11 +46,15 @@ def currency(x):
 item_list = []
 quantity_list = []
 price_list = []
+a_list = [1]
+pz_list = [5]
 
 variable_dict = {
     "Item": item_list,
     "Quantity": quantity_list,
-    "Price": price_list
+    "A": a_list,
+    "Price": price_list,
+    "Z": pz_list,
 }
 
 # Get user data
@@ -71,6 +75,7 @@ while item_name.lower() != "xxx":
     price = number_checker("How much for a single item? $", "The price must be a number (more than 0)", float)
 
     # add item, quantity and price to lists
+    print()
     item_list.append(item_name)
     quantity_list.append(quantity)
     price_list.append(price)
