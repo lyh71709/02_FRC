@@ -17,10 +17,8 @@ def number_checker(question, error, num_type):
         except ValueError:
             print(error)
 
-# yes/no checker goes here
-# ensures that the input is either yes or no
-
 # not_blank function here
+# Ensures that any input must not be left blank, the field must not be left empty
 def not_blank(question):
     valid = False
     error = "Sorry - this can't be blank, please enter your name"
@@ -35,6 +33,7 @@ def not_blank(question):
             print()
 
 # currency function goes here
+# Puts something into a currency format with two decimal places
 def currency(x):
     return "${:.2f}".format(x)
 
@@ -52,9 +51,7 @@ pz_list = [5]
 variable_dict = {
     "Item": item_list,
     "Quantity": quantity_list,
-    "A": a_list,
     "Price": price_list,
-    "Z": pz_list,
 }
 
 # Get user data
@@ -80,21 +77,20 @@ while item_name.lower() != "xxx":
     quantity_list.append(quantity)
     price_list.append(price)
 
-    variable_frame = pandas.DataFrame(variable_dict)
-    variable_frame = variable_frame.set_index('Item')
+variable_frame = pandas.DataFrame(variable_dict)
+variable_frame = variable_frame.set_index('Item')
 
-    # Calculate cost of each component
-    variable_frame['Cost'] = variable_frame['Quantity'] * variable_frame['Price']
+# Calculate cost of each component
+variable_frame['Cost'] = variable_frame['Quantity'] * variable_frame['Price']
 
-    # Find sub total
-    variable_sub = variable_frame['Cost'].sum()
+# Find sub total
+variable_sub = (variable_frame['Cost'].sum())
+# Currency Formatting (uses currency function)
+add_dollars = ['Price', 'Cost']
+for item in add_dollars:
+    variable_frame[item] = variable_frame[item].apply(currency)
 
-    # Currency Formatting (uses currency function)
-    add_dollars = ['Price', 'Cost']
-    for item in add_dollars:
-        variable_frame[item] = variable_frame[item].apply(currency)
-
-    # Printing Area
-    print(variable_frame)
-    print()
-    print("Variable Costs: {:.2f}".format(variable_sub))
+# Printing Area
+print(variable_frame)
+print()
+print("Variable Costs: ${:.2f}".format(variable_sub))
