@@ -57,6 +57,9 @@ def currency(x):
 # get_expenses function goes here
 # Gets expenses and then returns them as a list which has the data frame and sub total
 def get_expenses(var_fixed):
+
+    expense_frame = 0
+    sub_total = 0
     
     item_list = []
     quantity_list = []
@@ -117,6 +120,7 @@ def expense_print(heading, frame, subtotal):
 
 # Main Routine
 
+
 # Get user data
 product_name = not_blank("Product name: ")
 
@@ -145,7 +149,15 @@ else:
 print()
 print("Fundraising - {}".format(product_name))
 print()
-expense_print("Variable", variable_frame, variable_sub)
+if variable_frame == 0:
+    print("No Variable Costs Given")
+else:
+    expense_print("Variable", variable_frame, variable_sub)
 
-if have_fixed == "yes":
+if have_fixed == "yes" and fixed_frame != 0:
     expense_print("Fixed", fixed_frame[['Cost']], fixed_sub)
+else:
+    print("No Fixed Costs Given")
+
+print()
+print("Total Costs: ${:.2f}".format(variable_sub + fixed_sub))
