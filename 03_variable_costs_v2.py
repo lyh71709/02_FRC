@@ -36,9 +36,8 @@ def number_checker(question, error, num_type):
 
 # not_blank function here
 # Ensures that any input must not be left blank, the field must not be left empty
-def not_blank(question):
+def not_blank(question, error):
     valid = False
-    error = "Sorry - this can't be blank, please enter your name"
 
     while not valid:
         response = input(question)
@@ -57,9 +56,6 @@ def currency(x):
 # get_expenses function goes here
 # Gets expenses and then returns them as a list which has the data frame and sub total
 def get_expenses(var_fixed):
-
-    expense_frame = 0
-    sub_total = 0
     
     item_list = []
     quantity_list = []
@@ -74,10 +70,12 @@ def get_expenses(var_fixed):
     # loop to get component, quantity and price
     item_name = ""
     while item_name.lower() != "xxx":
+
         print()
         # get name, quantity and item
-        item_name = not_blank("Item name: ")
+        item_name = not_blank("Item name: ", "Name cannot be blank")
         if item_name.lower() == "xxx":
+            print("No Costs were given")
             break
 
         if var_fixed == "variable":
@@ -92,21 +90,24 @@ def get_expenses(var_fixed):
         quantity_list.append(quantity)
         price_list.append(price)
 
-        expense_frame = pandas.DataFrame(variable_dict)
-        expense_frame = expense_frame.set_index('Item')
+    expense_frame = pandas.DataFrame(variable_dict)
+    expense_frame = expense_frame.set_index('Item')
 
-        # Calculate cost of each component
-        expense_frame['Cost'] = expense_frame['Quantity'] * expense_frame["Price"]
+    # Calculate cost of each component
+    expense_frame['Cost'] = expense_frame['Quantity'] * expense_frame['Price']
 
-        # Find sub total
-        sub_total = expense_frame['Cost'].sum()
+    # Find sub total
+    sub_total = expense_frame['Cost'].sum()
 
-        # Currency Formatting (uses currency function)
-        add_dollars = ['Price', 'Cost']
-        for item in add_dollars:
-            expense_frame[item] = expense_frame[item].apply(currency)
+    # Currency Formatting (uses currency function)
+    add_dollars = ['Price', 'Cost']
+    for item in add_dollars:
+        expense_frame[item] = expense_frame[item].apply(currency)
 
-    return[expense_frame, sub_total]
+    print(expense_frame)
+    print(sub_total)
+
+    return [expense_frame, sub_total]
 
 def expense_print(heading, frame, subtotal):
     print()
@@ -122,7 +123,7 @@ def expense_print(heading, frame, subtotal):
 
 
 # Get user data
-product_name = not_blank("Product name: ")
+product_name = not_blank("Product name: ", "Product Name cannot be blank")
 
 print()
 print("Please enter your variable costs below...")
@@ -149,15 +150,11 @@ else:
 print()
 print("Fundraising - {}".format(product_name))
 print()
-if variable_frame == 0:
-    print("No Variable Costs Given")
-else:
-    expense_print("Variable", variable_frame, variable_sub)
 
-if have_fixed == "yes" and fixed_frame != 0:
+expense_print("Variable", variable_frame, variable_sub)
+
+if have_fixed == "yes":
     expense_print("Fixed", fixed_frame[['Cost']], fixed_sub)
-else:
-    print("No Fixed Costs Given")
 
 print()
 print("Total Costs: ${:.2f}".format(variable_sub + fixed_sub))
