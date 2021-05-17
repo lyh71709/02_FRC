@@ -1,3 +1,5 @@
+# Component - Variable Costs
+
 import pandas
 
 # Number checker function goes here

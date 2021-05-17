@@ -1,4 +1,4 @@
-# Component - Variable Costs
+# Combine variable and fixed costs
 
 import pandas
 
@@ -133,6 +133,17 @@ variable_frame = variable_expenses[0]
 variable_sub = variable_expenses[1]
 
 print()
+have_fixed = yes_no_checker("Do you have fixed costs (y/n)? ")
+
+if have_fixed == "yes":
+
+    # Fixed Costs
+    fixed_expenses = get_expenses("fixed")
+    fixed_frame = fixed_expenses[0]
+    fixed_sub = fixed_expenses[1]
+
+else:
+    fixed_sub = 0
 
 # Printing Area
 print()
@@ -141,5 +152,8 @@ print()
 
 expense_print("Variable", variable_frame, variable_sub)
 
+if have_fixed == "yes":
+    expense_print("Fixed", fixed_frame[['Cost']], fixed_sub)
+
 print()
-print("Total Costs: ${:.2f}".format(variable_sub))
+print("Total Costs: ${:.2f}".format(variable_sub + fixed_sub))

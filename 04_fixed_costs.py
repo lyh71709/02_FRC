@@ -1,4 +1,4 @@
-# Component - Variable Costs
+# Component - Fixed Costs
 
 import pandas
 
@@ -125,21 +125,17 @@ def expense_print(heading, frame, subtotal):
 product_name = not_blank("Product name: ", "Product Name cannot be blank")
 
 print()
-print("Please enter your variable costs below...")
 
-# Variable Costs
-variable_expenses = get_expenses("variable")
-variable_frame = variable_expenses[0]
-variable_sub = variable_expenses[1]
 
-print()
+
+# Fixed Costs
+fixed_expenses = get_expenses("fixed")
+fixed_frame = fixed_expenses[0]
+fixed_sub = fixed_expenses[1]
 
 # Printing Area
 print()
-print("Fundraising - {}".format(product_name))
-print()
-
-expense_print("Variable", variable_frame, variable_sub)
+expense_print("Fixed", fixed_frame[['Cost']], fixed_sub)
 
 print()
-print("Total Costs: ${:.2f}".format(variable_sub))
+print("Total Costs: ${:.2f}".format(fixed_sub))
