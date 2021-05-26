@@ -234,11 +234,33 @@ round_to = number_checker("Round to nearest...? $", "Can't be 0", int)
 
 # Calculate recommended price
 selling_price = sales_needed / how_many
-print("Selling Price (unrounded): ${:.2f}".format(selling_price))
+print("\nSelling Price (unrounded): ${:.2f}".format(selling_price))
 
 recommended_price = round_up(selling_price, round_to)
 
 # Write data to file
+# create file to hold data (add .txt extension)
+file_name = "{}.txt".format(product_name)
+text_file = open(file_name, "w+")
+
+# Change dataframe to string (so it can be written to a text file)
+variable_txt = pandas.DataFrame.to_string(variable_frame)
+fixed_txt = pandas.DataFrame.to_string(fixed_frame)
+
+profit_target_txt = ("${}".format(profit_target))
+selling_price_txt = ("${}".format(selling_price))
+recommended_price_txt = ("${}".format(recommended_price))
+
+# to_write is put in the middle because the variables aren't defined at the beginning
+to_write = [product_name, variable_txt, fixed_txt, profit_target_txt, selling_price_txt, recommended_price_txt]
+
+# heading
+for item in to_write:
+    text_file.write(item)
+    text_file.write("\n\n")
+
+# close file
+text_file.close()
 
 # Printing Area
 print()
