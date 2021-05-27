@@ -114,7 +114,7 @@ def get_expenses(var_fixed):
 # Displays the expenses in a legible way
 def expense_print(heading, frame, subtotal):
     print()
-    print("{} Costs".format(heading))
+    print("---------- {} Costs ----------".format(heading))
     print(frame)
     print()
     print("{} Costs: ${:.2f}".format(heading, subtotal))
@@ -234,8 +234,6 @@ round_to = number_checker("Round to nearest...? $", "Can't be 0", int)
 
 # Calculate recommended price
 selling_price = sales_needed / how_many
-print("\nSelling Price (unrounded): ${:.2f}".format(selling_price))
-
 recommended_price = round_up(selling_price, round_to)
 
 # Write data to file
@@ -247,24 +245,37 @@ text_file = open(file_name, "w+")
 variable_txt = pandas.DataFrame.to_string(variable_frame)
 fixed_txt = pandas.DataFrame.to_string(fixed_frame)
 
-profit_target_txt = ("${}".format(profit_target))
-selling_price_txt = ("${}".format(selling_price))
-recommended_price_txt = ("${}".format(recommended_price))
+# turn the values into strings so they can be written
+profit_target_txt = ("Profit Target: ${:.2f}".format(profit_target))
+total_sales_txt = ("Total Sales: ${:.2f}".format(all_costs))
+selling_price_txt = ("Minimum Price: ${:.2f}".format(selling_price))
+recommended_price_txt = ("Recommended Price: ${:.2f}".format(recommended_price))
+
+# title strings to make txt file neat
+product_name_title = ("========== Fundraising - {} ==========".format(product_name))
+variable_title = ("---------- Variable Costs ----------")
+fixed_title = ("---------- Fixed Costs ----------")
+total_costs_title = ("---------- Total Costs: ${:.2f} ----------".format(all_costs))
+profit_target_title = ("~~~~~~~~~~ Profit and Sales Targets ~~~~~~~~~~")
+pricing_title = ("~~~~~~~~~~ Pricing ~~~~~~~~~~")
+
 
 # to_write is put in the middle because the variables aren't defined at the beginning
-to_write = [product_name, variable_txt, fixed_txt, profit_target_txt, selling_price_txt, recommended_price_txt]
+to_write = [product_name_title, variable_title, variable_txt, fixed_title, 
+            fixed_txt, total_costs_title, profit_target_title, profit_target_txt, 
+            total_sales_txt, pricing_title, selling_price_txt, recommended_price_txt]
 
 # heading
 for item in to_write:
     text_file.write(item)
-    text_file.write("\n\n")
+    text_file.write("\n")
 
 # close file
 text_file.close()
 
 # Printing Area
 print()
-print("Fundraising - {}".format(product_name))
+print("\n========== Fundraising - {} ==========".format(product_name))
 print()
 
 expense_print("Variable", variable_frame, variable_sub)
@@ -273,13 +284,14 @@ if have_fixed == "yes":
     expense_print("Fixed", fixed_frame[['Cost']], fixed_sub)
 
 print()
-print("Total Costs: ${:.2f}".format(all_costs))
+print("---------- Total Costs: ${:.2f} ----------".format(all_costs))
 print()
 
 print()
-print("Profit and Sales Targets")
+print("~~~~~~~~~~ Profit and Sales Targets ~~~~~~~~~~")
 print("Profit Target: ${:.2f}".format(profit_target))
 print("Total Sales: ${:.2f}".format(all_costs + profit_target))
 
-print()
-print("Recommended Selling Price: ${:.2f}".format(selling_price))
+print("~~~~~~~~~~ Pricing ~~~~~~~~~~\n")
+print("Minimum Price: ${:.2f}".format(selling_price))
+print("Recommended Selling Price: ${:.2f}\n".format(recommended_price))

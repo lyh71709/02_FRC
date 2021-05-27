@@ -1,0 +1,16 @@
+xxx
+
+Empty DataFrame
+Columns: [Price, Quantity, Cost]
+Index: []
+
+Empty DataFrame
+Columns: [Price, Quantity, Cost]
+Index: []
+
+$0.0
+
+$0.0
+
+$0
+

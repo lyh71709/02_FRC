@@ -1,0 +1,16 @@
+Custom
+
+      Price  Quantity     Cost
+Item                          
+Mugs  $1.00       300  $300.00
+
+       Price  Quantity    Cost
+Item                          
+rent  $25.00         1  $25.00
+
+$100.0
+
+$141.66666666666666
+
+$200
+

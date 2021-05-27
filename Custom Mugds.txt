@@ -1,0 +1,16 @@
+Custom Mugds
+
+      Price  Quantity     Cost
+Item                          
+Mugs  $1.00       300  $300.00
+
+       Price  Quantity    Cost
+Item                          
+rent  $25.00         1  $25.00
+
+$750.0
+
+$3.5833333333333335
+
+$10
+
