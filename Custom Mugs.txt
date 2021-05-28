@@ -1,16 +1,21 @@
 ========== Fundraising - Custom Mugs ==========
+
 ---------- Variable Costs ----------
-      Price  Quantity     Cost
-Item                          
-Mugs  $1.00       300  $300.00
+Empty DataFrame
+Columns: [Price, Quantity, Cost]
+Index: []
+
 ---------- Fixed Costs ----------
-       Price  Quantity    Cost
-Item                          
-Rent  $25.00         1  $25.00
----------- Total Costs: $325.00 ----------
+No fixed costs were given
+
+Fixed Costs: $0.00
+
+---------- Total Costs: $0.00 ----------
+
 ~~~~~~~~~~ Profit and Sales Targets ~~~~~~~~~~
-Profit Target: $750.00
-Total Sales: $325.00
+Profit Target: $100.00
+Total Sales: $0.00
+
 ~~~~~~~~~~ Pricing ~~~~~~~~~~
-Minimum Price: $3.58
-Recommended Price: $4.00
+Minimum Price: $10.00
+Recommended Price: $10.00

@@ -64,6 +64,7 @@ def get_expenses(var_fixed):
     item_list = []
     quantity_list = []
     price_list = []
+    loop_counter = 0
 
     variable_dict = {
         "Item": item_list,
@@ -75,11 +76,14 @@ def get_expenses(var_fixed):
     item_name = ""
     while item_name.lower() != "xxx":
 
+        loop_counter += 1
+
         print()
         # get name, quantity and item
         item_name = not_blank("Item name: ", "Name cannot be blank")
         if item_name.lower() == "xxx":
-            print("No Costs were given")
+            if loop_counter == 1:
+                print("No Costs were given")
             break
 
         if var_fixed == "variable":
@@ -208,6 +212,9 @@ print("Please enter your variable costs below...")
 variable_expenses = get_expenses("variable")
 variable_frame = variable_expenses[0]
 variable_sub = variable_expenses[1]
+# Fix!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if variable_frame == "No Costs were given Empty DataFrame Columns: [Price, Quantity, Cost] Index: []":
+    vairbale_frame
 
 print()
 have_fixed = yes_no_checker("Do you have fixed costs (y/n)? ")
@@ -243,7 +250,11 @@ text_file = open(file_name, "w+")
 
 # Change dataframe to string (so it can be written to a text file)
 variable_txt = pandas.DataFrame.to_string(variable_frame)
-fixed_txt = pandas.DataFrame.to_string(fixed_frame)
+
+if have_fixed == "yes":
+    fixed_txt = pandas.DataFrame.to_string(fixed_frame[['Cost']])
+else:
+    fixed_txt = "No fixed costs were given\n\nFixed Costs: $0.00"
 
 # turn the values into strings so they can be written
 profit_target_txt = ("Profit Target: ${:.2f}".format(profit_target))
@@ -282,15 +293,18 @@ expense_print("Variable", variable_frame, variable_sub)
 
 if have_fixed == "yes":
     expense_print("Fixed", fixed_frame[['Cost']], fixed_sub)
+else:
+    expense_print("Fixed", "No Fixed Costs were given", 0)
 
 print()
 print("---------- Total Costs: ${:.2f} ----------".format(all_costs))
 print()
 
 print()
-print("~~~~~~~~~~ Profit and Sales Targets ~~~~~~~~~~")
+print("~~~~~~~~~~ Profit and Sales Targets ~~~~~~~~~~\n")
 print("Profit Target: ${:.2f}".format(profit_target))
 print("Total Sales: ${:.2f}".format(all_costs + profit_target))
+print()
 
 print("~~~~~~~~~~ Pricing ~~~~~~~~~~\n")
 print("Minimum Price: ${:.2f}".format(selling_price))
