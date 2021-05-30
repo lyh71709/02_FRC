@@ -1,0 +1,21 @@
+========== Fundraising - Henry ==========
+
+---------- Variable Costs ----------
+      Price  Quantity   Cost
+Item                        
+mugs  $1.00         3  $3.00
+
+---------- Fixed Costs ----------
+No fixed costs were given
+
+Fixed Costs: $0.00
+
+---------- Total Costs: $3.00 ----------
+
+~~~~~~~~~~ Profit and Sales Targets ~~~~~~~~~~
+Profit Target: $100.00
+Total Sales: $3.00
+
+~~~~~~~~~~ Pricing ~~~~~~~~~~
+Minimum Price: $34.33
+Recommended Price: $35.00

@@ -1,0 +1,21 @@
+========== Fundraising - Mugs ==========
+
+---------- Variable Costs ----------
+No variable costs were given
+
+Variable Costs: $0.00
+
+---------- Fixed Costs ----------
+        Cost
+Item        
+rent  $20.00
+
+---------- Total Costs: $20.00 ----------
+
+~~~~~~~~~~ Profit and Sales Targets ~~~~~~~~~~
+Profit Target: $25.00
+Total Sales: $20.00
+
+~~~~~~~~~~ Pricing ~~~~~~~~~~
+Minimum Price: $4.50
+Recommended Price: $5.00

@@ -98,21 +98,25 @@ def get_expenses(var_fixed):
         quantity_list.append(quantity)
         price_list.append(price)
 
-    expense_frame = pandas.DataFrame(variable_dict)
-    expense_frame = expense_frame.set_index('Item')
+    if variable_dict["Item"] == []:
+        return "nvc" # For "No Variable Costs"
+        
+    else:
+        expense_frame = pandas.DataFrame(variable_dict)
+        expense_frame = expense_frame.set_index('Item')
 
-    # Calculate cost of each component
-    expense_frame['Cost'] = expense_frame['Quantity'] * expense_frame['Price']
+        # Calculate cost of each component
+        expense_frame['Cost'] = expense_frame['Quantity'] * expense_frame['Price']
 
-    # Find sub total
-    sub_total = expense_frame['Cost'].sum()
+        # Find sub total
+        sub_total = expense_frame['Cost'].sum()
 
-    # Currency Formatting (uses currency function)
-    add_dollars = ['Price', 'Cost']
-    for item in add_dollars:
-        expense_frame[item] = expense_frame[item].apply(currency)
+        # Currency Formatting (uses currency function)
+        add_dollars = ['Price', 'Cost']
+        for item in add_dollars:
+            expense_frame[item] = expense_frame[item].apply(currency)
 
-    return [expense_frame, sub_total]
+        return [expense_frame, sub_total]
 
 # expense_print function goes here
 # Displays the expenses in a legible way
@@ -210,11 +214,13 @@ print("Please enter your variable costs below...")
 
 # Variable Costs
 variable_expenses = get_expenses("variable")
-variable_frame = variable_expenses[0]
-variable_sub = variable_expenses[1]
-# Fix!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-if variable_frame == "No Costs were given Empty DataFrame Columns: [Price, Quantity, Cost] Index: []":
-    vairbale_frame
+if variable_expenses == "nvc":
+    variable_frame = "No Variable Costs Were Given"
+    variable_sub = 0
+else:
+    variable_frame = variable_expenses[0]
+    variable_sub = variable_expenses[1]
+
 
 print()
 have_fixed = yes_no_checker("Do you have fixed costs (y/n)? ")
@@ -249,7 +255,10 @@ file_name = "{}.txt".format(product_name)
 text_file = open(file_name, "w+")
 
 # Change dataframe to string (so it can be written to a text file)
-variable_txt = pandas.DataFrame.to_string(variable_frame)
+if variable_expenses == "nvc":
+    variable_txt = "No variable costs were given\n\nVariable Costs: $0.00"
+else:
+    variable_txt = pandas.DataFrame.to_string(variable_frame)
 
 if have_fixed == "yes":
     fixed_txt = pandas.DataFrame.to_string(fixed_frame[['Cost']])

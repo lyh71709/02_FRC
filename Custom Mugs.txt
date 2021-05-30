@@ -1,9 +1,9 @@
 ========== Fundraising - Custom Mugs ==========
 
 ---------- Variable Costs ----------
-Empty DataFrame
-Columns: [Price, Quantity, Cost]
-Index: []
+No variable costs were given
+
+Variable Costs: $0.00
 
 ---------- Fixed Costs ----------
 No fixed costs were given
@@ -17,5 +17,5 @@ Profit Target: $100.00
 Total Sales: $0.00
 
 ~~~~~~~~~~ Pricing ~~~~~~~~~~
-Minimum Price: $10.00
-Recommended Price: $10.00
+Minimum Price: $100.00
+Recommended Price: $100.00
